@@ -1,0 +1,604 @@
+@gridWidth:             1200;
+@1of4:                  @gridWidth/12-6;
+@1:                     @gridWidth/6-6;
+@2:                     @gridWidth/3-6;
+@font:                  100 14px/1.4em 'Helvetica';
+@beforeFontSize:        190px;
+@beforeLineHeight:      190px;
+@linkColor:             white;
+@textAlign:             left;
+@masterMargin:          1;
+@frontBackground:       blue;
+@backBackground:        black;
+@iconSize:              40;
+@iconColor:             @linkColor;
+@iconBottomDistance:    10px;
+@iconRightDistance:     10px;
+
+.link-table {
+    width: unit(@gridWidth, px);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+}
+.flip-group-container {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    .flipper {
+        display: inline-block;
+        &:hover {
+            transform: rotateY(180deg);
+        }
+    }
+    &:first-child,
+    &:nth-child(2) {
+        margin: 0 0 5px 0;
+    }
+}
+.flip-container {
+	perspective: 1000;
+    display: inline-block;
+    margin: unit(@masterMargin, px) unit(@masterMargin, px) unit(@masterMargin+4, px) unit(@masterMargin, px);
+    padding: 0;
+    text-align: center;
+    vertical-align: top;
+    overflow: hidden;
+    &:hover,
+    &.hover {
+        > .flipper {
+            transform: rotateY(180deg);
+        }
+    }
+    .flipper {
+    	transition: .6s;
+    	transform-style: preserve-3d;
+    	position: relative;
+        width: 100%;
+        height: 100%;
+    	cursor: pointer;
+        .front, .back {
+        	backface-visibility: hidden;
+        	position: absolute;
+        	top: 0;
+        	left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            text-align: @textAlign;
+            font: @font;
+            vertical-align: top;
+            a {
+                display: inline-block;
+                padding: 10px;
+                color: @linkColor;
+                text-decoration: none;
+                label,
+                img,
+                .blind {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    float: left;
+                    margin: 0;
+                    padding: 0;
+                    border: 0;
+                }
+                label {
+                    top: 10px;
+                    left: 10px;
+                    z-index: 9;
+                    cursor: pointer;
+                }
+                img {
+                    z-index: 1;
+                }
+                .blind {
+                    z-index: 5;
+                    background: fadeout(black, 40%);
+                }
+                span {
+                    display: inline-block;
+                    position: absolute;
+                    bottom: @iconBottomDistance;
+                    right: @iconRightDistance;
+                    z-index: 9;
+                    width: unit(@iconSize, px);
+                    height: unit(@iconSize, px);
+                    font-size: unit(@iconSize, px);
+                    color: @iconColor;
+                    &:before {
+                        font-weight: lighter;
+                    }
+                }
+            }
+        }
+        .front {
+        	z-index: 2;
+        	transform: rotateY(0deg);
+            background: @frontBackground;
+        }
+        .back {
+        	transform: rotateY(180deg);
+            background: @backBackground;
+        }
+    }
+}
+// Adjusting boxes
+.flip-container1of4x1of4 {
+    width: unit(@1of4, px);
+	height: unit(@1of4, px);
+    .flipper {
+        .front, .back {
+            a {
+                width: unit(@1of4, px);
+                height: unit(@1of4, px);
+                span {
+                    bottom: 10px;
+                    right: 10px;
+                    width: unit(@iconSize/2, px);
+                    height: unit(@iconSize/2, px);
+                    font-size: unit(@iconSize/2, px);
+                }
+            }
+            div:before {
+                font-size: @beforeFontSize;
+                line-height: @beforeLineHeight;
+            }
+        }
+    }
+}
+.flip-container1x1 {
+    width: unit(@1, px);
+	height: unit(@1, px);
+    .flipper {
+        .front, .back {
+            a {
+                width: unit(@1, px);
+                height: unit(@1, px);
+            }
+            div:before {
+                font-size: @beforeFontSize;
+                line-height: @beforeLineHeight;
+            }
+        }
+    }
+}
+.flip-container1x2 {
+    width: unit(@1, px);
+	height: unit(@2, px);
+    .flipper {
+        .front, .back {
+            a {
+                width: unit(@1, px);
+                height: unit(@2, px);
+            }
+            div:before {
+                font-size: @beforeFontSize;
+                line-height: @beforeLineHeight;
+            }
+        }
+    }
+}
+.flip-container2x1 {
+    width: unit(@2, px);
+	height: unit(@1, px);
+    .flipper {
+        .front, .back {
+            a {
+                width: unit(@2, px);
+                height: unit(@1, px);
+            }
+            div:before {
+                font-size: @beforeFontSize;
+                line-height: @beforeLineHeight;
+            }
+        }
+    }
+}
+.flip-container2x2 {
+    width: unit(@2, px);
+	height: unit(@2, px);
+    .flipper {
+        .front, .back {
+            a {
+                width: unit(@2, px);
+                height: unit(@2, px);
+            }
+            div:before {
+                font-size: @beforeFontSize;
+                line-height: @beforeLineHeight;
+            }
+        }
+    }
+}
+@media only screen and (min-width: 1020px) and (max-width: 1230px) {
+    .below-desktop1of4x1of4 {
+        width: unit(@1of4, px);
+    	height: unit(@1of4, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1of4, px);
+                    height: unit(@1of4, px);
+                }
+            }
+        }
+    }
+    .below-desktop1x1 {
+        width: unit(@1, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .below-desktop1x2 {
+        width: unit(@1, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .below-desktop2x1 {
+        width: unit(@2, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .below-desktop2x2 {
+        width: unit(@2, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .hide-below-desktop {
+        display: none;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1020px) {
+    .tablet1of4x1of4 {
+        width: unit(@1of4, px);
+    	height: unit(@1of4, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1of4, px);
+                    height: unit(@1of4, px);
+                }
+            }
+        }
+    }
+    .tablet1x1 {
+        width: unit(@1, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .tablet1x2 {
+        width: unit(@1, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .tablet2x1 {
+        width: unit(@2, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .tablet2x2 {
+        width: unit(@2, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .hide-tablet {
+        display: none;
+    }
+}
+@media only screen and (min-width: 400px) and (max-width: 768px) {
+    .phone1of4x1of4 {
+        width: unit(@1of4, px);
+    	height: unit(@1of4, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1of4, px);
+                    height: unit(@1of4, px);
+                }
+            }
+        }
+    }
+    .flip-container2x1,
+    .flip-container2x2,
+    .phone1x1 {
+        width: unit(@1, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .phone1x2 {
+        width: unit(@1, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .phone2x1 {
+        width: unit(@2, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .phone2x2 {
+        width: unit(@2, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .hide-phone {
+        display: none;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .below-phone1of4x1of4 {
+        width: unit(@1of4, px);
+    	height: unit(@1of4, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1of4, px);
+                    height: unit(@1of4, px);
+                }
+            }
+        }
+    }
+    .below-phone1x1 {
+        width: unit(@1, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .below-phone1x2 {
+        width: unit(@1, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .below-phone2x1 {
+        width: unit(@2, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .below-phone2x2 {
+        width: unit(@2, px);
+    	height: unit(@2, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@2, px);
+                    height: unit(@2, px);
+                }
+            }
+        }
+    }
+    .hide-below-phone {
+        display: none;
+    }
+}
+@media only screen and (max-width: 1230px) {
+    .hide-all-below-desktop {
+        display: none;
+    }
+}
+@media only screen and (max-width: 1020px) {
+    .flip-container2x1,
+    .flip-container2x2,
+    .below-phone1x1 {
+        width: unit(@1, px);
+    	height: unit(@1, px);
+        .flipper {
+            .front, .back {
+                a {
+                    width: unit(@1, px);
+                    height: unit(@1, px);
+                }
+            }
+        }
+    }
+    .hide-all-below-tablet {
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .hide-all-below-phone {
+        display: none;
+    }
+}
+
+.static-container {
+    a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        background: @frontBackground;
+        color: @linkColor;
+        text-decoration: none;
+        text-align: @textAlign;
+        font: @font;
+        label {
+            font: @font;
+            cursor: pointer;
+        }
+    }
+}
+.static-container1of4x1of4 {
+    width: unit(@1of4, px);
+	height: unit(@1of4, px);
+    a {
+        width: unit(@1of4, px);
+        height: unit(@1of4, px);
+        span {
+            bottom: 10px;
+            right: 10px;
+            width: unit(@iconSize/2, px);
+            height: unit(@iconSize/2, px);
+            font-size: unit(@iconSize/2, px);
+        }
+    }
+}
+.static-container1x1 {
+    width: unit(@1, px);
+	height: unit(@1, px);
+    a {
+        width: unit(@1, px);
+        height: unit(@1, px);
+        span {
+            bottom: 10px;
+            right: 10px;
+            width: unit(@iconSize/2, px);
+            height: unit(@iconSize/2, px);
+            font-size: unit(@iconSize/2, px);
+        }
+    }
+}
+.static-container1x2 {
+    width: unit(@1, px);
+	height: unit(@2, px);
+    a {
+        width: unit(@1, px);
+        height: unit(@2, px);
+        span {
+            bottom: 10px;
+            right: 10px;
+            width: unit(@iconSize/2, px);
+            height: unit(@iconSize/2, px);
+            font-size: unit(@iconSize/2, px);
+        }
+    }
+}
+.static-container2x1 {
+    width: unit(@2, px);
+	height: unit(@1, px);
+    a {
+        width: unit(@2, px);
+        height: unit(@1, px);
+        span {
+            bottom: 10px;
+            right: 10px;
+            width: unit(@iconSize/2, px);
+            height: unit(@iconSize/2, px);
+            font-size: unit(@iconSize/2, px);
+        }
+    }
+}
+.static-container2x2 {
+    width: unit(@2, px);
+	height: unit(@2, px);
+    a {
+        width: unit(@2, px);
+        height: unit(@2, px);
+        span {
+            bottom: 10px;
+            right: 10px;
+            width: unit(@iconSize/2, px);
+            height: unit(@iconSize/2, px);
+            font-size: unit(@iconSize/2, px);
+        }
+    }
+}
